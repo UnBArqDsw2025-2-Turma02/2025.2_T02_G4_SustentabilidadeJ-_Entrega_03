@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class Token:
+    def __init__(self, quantidade):
+        self.quantidade = quantidade
