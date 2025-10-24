@@ -1,13 +1,25 @@
 <!-- docs/_sidebar.md -->
 
-- [Home](/docs)
-- [Projetos](/docs/Projeto/Projeto.md)
+- [Home](/)
+- [Projeto](Projeto/Projeto.md)
 
 - **Padrões de Projeto**
-  - [3. Desenho de Software (Padrões de Projeto)](/docs/PadroesDeProjeto/3.PadroesDeProjeto.md)
-    - [3.1. Padrões de Projeto GoFs Criacionais](/docs/PadroesDeProjeto/3.1.GoFsCriacionais.md)
-    - [3.2. Padrões de Projeto GoFs Estruturais](/docs/PadroesDeProjeto/3.2.GoFsEstruturais.md)
-    - [3.3. Padrões de Projeto GoFs Comportamentais](/docs/PadroesDeProjeto/3.3.GoFsComportamentais.md)
-    - [3.4. Participações - Padrões de Projeto](/docs/PadroesDeProjeto/3.4.ParticipacoesPadroes.md)
-    - [3.5. Iniciativas Extras - Padrões de Projeto](/docs/PadroesDeProjeto/3.5.IniciativasExtras.md)
-      
+  - [3. Desenho de Software (Padrões de Projeto)](PadroesDeProjeto/3.PadroesDeProjeto.md)
+
+  - **3.1. GoFs Criacionais**
+    - [3.1. Módulo GoFs Criacionais](PadroesDeProjeto/3.1.GoFsCriacionais.md)
+    - [3.1.1. Singleton](PadroesDeProjeto/3.1.1Singleton.md)
+    - [3.1.1. Relatório Builder](PadroesDeProjeto/3.1.1.RelatorioBuilder.md)
+
+  - **3.2. GoFs Estruturais**
+    - [3.2. Módulo GoFs Estruturais](PadroesDeProjeto/3.2.GoFsEstruturais.md)
+    - [3.2.1. Relatório Adapter](PadroesDeProjeto/3.2.1.RelatorioAdapter.md)
+
+  - **3.3. GoFs Comportamentais**
+    - [3.3. Módulo GoFs Comportamentais](PadroesDeProjeto/3.3.GoFsComportamentais.md)
+    - [3.3.1. Template Method](PadroesDeProjeto/3.3.1.TemplateMethod.md)
+    - [3.3.2. Strategy](PadroesDeProjeto/3.3.2Strategy.md)
+    - [3.3.2. Relatório Command](PadroesDeProjeto/3.3.2.RelatorioCommand.md)
+
+  - [3.4. Participações - Padrões de Projeto](PadroesDeProjeto/3.4.ParticipacoesPadroes.md)
+  - [3.5. Iniciativas Extras - Padrões de Projeto](PadroesDeProjeto/3.5.IniciativasExtras.md)
