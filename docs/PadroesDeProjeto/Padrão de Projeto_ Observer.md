@@ -1,4 +1,4 @@
-# Padrão de Projeto: Observer (Observador)
+# Padrão de Projeto: Observer
 
 **Grupo:** G4 - T02 - 2025.2
 **Disciplina:** Padrões de Projeto
