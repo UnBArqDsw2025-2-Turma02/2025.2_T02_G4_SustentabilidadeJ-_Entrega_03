@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'App.tokens.apps.TokensConfig',
     'App.rewards.apps.RewardsConfig',
     'App.marketplace.apps.MarketplaceConfig',
+    "App.abstract_factory.apps.AbstractFactoryConfig", 
 ]
 
 
