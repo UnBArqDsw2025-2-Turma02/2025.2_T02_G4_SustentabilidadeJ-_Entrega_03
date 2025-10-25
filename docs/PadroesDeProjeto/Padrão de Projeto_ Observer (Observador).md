@@ -4,7 +4,7 @@
 **Disciplina:** Padrões de Projeto
 **Projeto:** SustentabilizeJá
 **Data:** 24 de Outubro de 2025
-**Autores:** [Nomes dos Autores do Grupo G4 - T02 - 2025.2]
+**Autores:** Lucas de Oliveira Dias Marques Ferreira
 
 ## 1. Introdução
 
