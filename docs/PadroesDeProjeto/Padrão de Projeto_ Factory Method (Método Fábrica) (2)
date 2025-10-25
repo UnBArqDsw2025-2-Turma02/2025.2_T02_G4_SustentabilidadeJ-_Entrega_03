@@ -1,0 +1,123 @@
+# Padrão de Projeto: Factory Method (Método Fábrica)
+
+**Grupo:** G4 - T02 - 2025.2 **Disciplina:** Padrões de Projeto **Projeto:** SustentabilizeJá **Data:** 24 de Outubro de 2025 **Autores:** Lucas de Oliveira Dias Marques Ferreira
+
+## 1. Introdução
+
+O padrão de projeto **Factory Method** (Método Fábrica) é um padrão de criação que define uma interface para criar um objeto, mas permite que as subclasses decidam qual classe instanciar. Ele permite que uma classe delegue a responsabilidade de instanciação para suas subclasses.
+
+No contexto do projeto SustentabilizeJá, este padrão foi implementado para gerenciar a criação de diferentes tipos de **recompensas** (Rewards) que os usuários podem resgatar. A complexidade de criar e configurar cada tipo de recompensa (desconto, certificado, doação, etc.) é isolada em uma fábrica, garantindo que o código cliente (o módulo de resgate, por exemplo) não precise conhecer as classes concretas de recompensa.
+
+## 2. Metodologia
+
+A aplicação do Factory Method no módulo `rewards` do SustentabilizeJá segue a estrutura clássica do padrão:
+
+1. **Produto Abstrato (****`RewardHandler`****):** Define a interface comum para todos os objetos de recompensa (o método `redeem`).
+
+1. **Produtos Concretos (****`DiscountHandler`****, ****`CertificateHandler`****, ****`DonationHandler`****):** Implementam a interface `RewardHandler` para lidar com a lógica específica de cada tipo de resgate.
+
+1. **Criador Concreto (****`RewardFactory`****):** Contém o método fábrica (`create_handler`) que decide qual `RewardHandler` concreto instanciar com base no tipo de recompensa solicitado.
+
+Essa abordagem garante **extensibilidade** e **baixo acoplamento**. Para adicionar um novo tipo de recompensa (ex: "Produto Físico"), basta criar uma nova classe `RewardHandler` concreta e adicionar uma nova condição no método fábrica, sem modificar o código existente que usa a fábrica.
+
+## 3. Diagrama UML (PlantUML)
+
+O diagrama de classes a seguir ilustra a estrutura do padrão Factory Method aplicado ao gerenciamento de recompensas no SustentabilizeJá.
+
+```plantuml
+@startuml FactoryMethod
+skinparam classAttributeIconStyle private
+
+interface RewardHandler {
+    + redeem(user_id, reward_info)
+}
+
+class DiscountHandler {
+    + redeem(user_id, reward_info)
+}
+
+class CertificateHandler {
+    + redeem(user_id, reward_info)
+}
+
+class DonationHandler {
+    + redeem(user_id, reward_info)
+}
+
+class RewardFactory {
+    + create_handler(reward_type)
+}
+
+RewardHandler <|.. DiscountHandler
+RewardHandler <|.. CertificateHandler
+RewardHandler <|.. DonationHandler
+
+RewardFactory ..> RewardHandler : <<creates>>
+
+@enduml
+```
+
+## 4. Código-Fonte
+
+O código-fonte do arquivo `rewards/factory.py` demonstra a implementação do padrão.
+
+```python
+from typing import Dict, Any
+
+class RewardHandler:
+    """Produto Abstrato: Define a interface para os objetos de recompensa."""
+    def redeem(self, user_id: str, reward_info: Dict[str, Any]) -> Dict[str, Any]:
+        raise NotImplementedError
+
+class DiscountHandler(RewardHandler):
+    """Produto Concreto: Lógica para resgate de Descontos."""
+    def redeem(self, user_id: str, reward_info: Dict[str, Any]) -> Dict[str, Any]:
+        partner = reward_info.get("partner_id", "parceiro_default")
+        percent = reward_info.get("percent", 0.1)
+        return {"status":"ok","type":"discount","user":user_id,"partner":partner,"percent":percent}
+
+class CertificateHandler(RewardHandler):
+    """Produto Concreto: Lógica para resgate de Certificados/Medalhas."""
+    def redeem(self, user_id: str, reward_info: Dict[str, Any]) -> Dict[str, Any]:
+        title = reward_info.get("title","Certificado de Participação")
+        return {"status":"ok","type":"certificate","user":user_id,"title":title}
+
+class DonationHandler(RewardHandler):
+    """Produto Concreto: Lógica para resgate de Doações."""
+    def redeem(self, user_id: str, reward_info: Dict[str, Any]) -> Dict[str, Any]:
+        charity = reward_info.get("charity","GreenOrg")
+        amount = reward_info.get("amount",10.0)
+        return {"status":"ok","type":"donation","user":user_id,"charity":charity,"amount":amount}
+
+class RewardFactory:
+    """Criador Concreto: Implementa o Método Fábrica para criar o handler apropriado."""
+    def create_handler(self, reward_type: str):
+        rt = reward_type.lower()
+        if rt == "discount" or rt == "desconto":
+            return DiscountHandler()
+        if rt == "certificate" or rt == "medalha":
+            return CertificateHandler()
+        if rt == "donation" or rt == "doacao":
+            return DonationHandler()
+        raise ValueError(f"Unknown reward type: {reward_type}")
+
+# Exemplo de Uso (para fins de documentação)
+# factory = RewardFactory()
+# discount_handler = factory.create_handler("discount")
+# result = discount_handler.redeem("user123", {"partner_id": "EcoPartner", "percent": 0.2})
+# print(result)
+```
+
+## 5. Conclusão
+
+A implementação do padrão Factory Method no módulo de recompensas do SustentabilizeJá demonstrou ser uma solução eficaz para o **problema de criação de objetos**. Ao centralizar a lógica de instanciação na `RewardFactory`, o sistema se torna mais **coeso** e **adaptável** a futuras adições de tipos de recompensa, aderindo ao princípio **Open/Closed** (aberto para extensão, fechado para modificação).
+
+## 6. Histórico de Versões
+
+| Versão | Data | Descrição |
+| --- | --- | --- |
+| 1.0 | 24/10/2025 | Criação inicial do artefato. |
+
+---
+
+**Link para o código no repositório (exemplo):** [rewards/factory.py](https://github.com/SustentabilizeJa/sustentabilize-ja/blob/main/rewards/factory.py)
